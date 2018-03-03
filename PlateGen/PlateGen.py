@@ -28,7 +28,6 @@ def FindMatches(SearchDirectory, FileExpression):
     return glob.glob(SearchDirectory + "/**/" + FileExpression, recursive=True)
 
 def MakeFileHandle(FileName):
-    print("Made File Handle")
     return open(FileName, "r+")
 
 def RemovePlate(FileHandle, FileName, BlockLastLine):
