@@ -31,14 +31,12 @@ def MakeFileHandle(FileName):
     return open(FileName, "r+")
 
 def RemovePlate(FileHandle, FileName, BlockLastLine):
-    print("SEEKING TO: ", BlockLastLine)
     FileHandle.seek(0, 0)
     # Read Until We're at the Target Line
     for Iter in range(BlockLastLine):
         FileHandle.readline()
     with open(FileName + ".tmp", "w") as TmpFile:
         for Line in FileHandle:
-            print("WRITING LINE: ", Line)
             TmpFile.write(Line)
     FileHandle.close()
     # Swap Temp with Original
@@ -50,7 +48,7 @@ def ContainsPlate(FileHandle, PlateBlock):
     BlockList = [next(FileHandle) for X in range(PlateBlock.count("\n") + 1)]
     Block = ''.join(BlockList)
     if (PlateBlock + "\n" == Block):
-        print("Found Plate Match")
+        print("Found Plate Match in File: ", FileHandle.name)
         return True
     return False
 
