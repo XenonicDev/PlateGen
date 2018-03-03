@@ -1,6 +1,7 @@
 import sys
 import glob
 import xml.etree.ElementTree as ElementTree
+import os
 
 def GetDirectoryList(TreeRoot):
     Directories = []
@@ -26,8 +27,14 @@ def GetOldBoilerplates(TreeRoot):
 def FindMatches(SearchDirectory, FileExpression):
     return glob.glob(SearchDirectory + "/**/" + FileExpression, recursive=True)
 
-def RemovePlate(FileHandle, LineStart, LineEnd):
-    print()  # Placeholder
+def RemovePlate(FileHandle, FileName, BlockLastLine):
+    FileHandle.seek(BlockLastLine, 0)
+    with open(FileName + ".tmp", "w") as TmpFile:
+        for Line in FileHandle
+            TmpFile.write(Line)
+    # Swap Temp with Original
+    os.remove(FileName)
+    os.rename(FileName + ".tmp", FileName)
 
 def ContainsPlate(FileHandle, PlateBlock):
     return False
@@ -46,7 +53,7 @@ for Directory in GetDirectoryList(ConfigRoot):
             with open(FileName, "r+") as File:
                 for OldPlate in GetOldBoilerplates(ConfigRoot):
                     if ContainsPlate(File, OldPlate):
-                        RemovePlate(File, 0, OldPlate.count("\n"))  # TODO: Search for First Character, Don't Start at 0
+                        RemovePlate(File, FileName, OldPlate.count("\n"))
                 if ContainsPlate(File, GetBoilerplate(ConfigRoot)):
-                    RemovePlate(File, 0, GetBoilerplate(ConfigRoot).count("\n"))  # TODO: Search for First Character, Don't Start at 0
+                    RemovePlate(File, FileName, GetBoilerplate(ConfigRoot).count("\n"))
                 AddPlate(File, GetBoilerplate(ConfigRoot))
