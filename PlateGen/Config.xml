@@ -1,0 +1,28 @@
+<!--
+	List of Directories to Search In.
+-->
+<DirectoryList>
+	<DirectoryA>D:\Code\Projects\PlateGen\Sample</DirectoryA>
+</DirectoryList>
+
+<!--
+	List of File Names to Include.
+-->
+<FileList>
+	<FileA>*.*</FileA>
+</FileList>
+
+<!--
+	Target Text Block to Add as Boilerplate
+-->
+<Boilerplate>
+/*
+	Test Boilerplate
+*/
+</Boilerplate>
+
+<!--
+	List of Potential Boilerplates to Search for and Replace with New Boilerplate Block
+-->
+<OldBoilerplates>
+</OldBoilerplates>
