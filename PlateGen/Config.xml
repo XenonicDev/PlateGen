@@ -16,11 +16,9 @@
 	<!--
 		Target Text Block to Add as Boilerplate
 	-->
-	<Boilerplate>
-/*
+	<Boilerplate>/*
 	Test Boilerplate
-*/
-	</Boilerplate>
+*/</Boilerplate>
 
 	<!--
 		List of Potential Boilerplates to Search for and Replace with New Boilerplate Block

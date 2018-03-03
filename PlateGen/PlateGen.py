@@ -30,7 +30,7 @@ def AddPlate(FileName, PlateBlock):
     with open(FileName, "r+") as File:
         Content = File.read()
         File.seek(0, 0)
-        File.write(PlateBlock.rstrip("\r\n") + Content)
+        File.write(PlateBlock.rstrip("\r\n") + "\n" + Content)
 
 ConfigTree = ElementTree.parse("Config.xml")
 ConfigRoot = ConfigTree.getroot()
