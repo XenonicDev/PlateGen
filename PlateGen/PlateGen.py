@@ -31,7 +31,6 @@ def MakeFileHandle(FileName):
     return open(FileName, "r+")
 
 def RemovePlate(FileHandle, FileName, BlockLastLine):
-    print("Removing Plate")
     FileHandle.seek(BlockLastLine, 0)
     with open(FileName + ".tmp", "w") as TmpFile:
         for Line in FileHandle:
@@ -43,7 +42,10 @@ def RemovePlate(FileHandle, FileName, BlockLastLine):
 
 def ContainsPlate(FileHandle, PlateBlock):
     FileHandle.seek(0, 0)
-    if PlateBlock in FileHandle.read(PlateBlock.count("\n")):
+    BlockList = [next(FileHandle) for X in range(PlateBlock.count("\n") + 1)]
+    Block = ''.join(BlockList)
+    if (PlateBlock + "\n" == Block):
+        print("Found Plate Match")
         return True
     return False
 
@@ -65,7 +67,6 @@ for Directory in GetDirectoryList(ConfigRoot):
                     RemovePlate(File, FileName, OldPlate.count("\n"))
                     File = MakeFileHandle(FileName)
             if ContainsPlate(File, GetBoilerplate(ConfigRoot)):
-                RemovePlate(File, FileName, GetBoilerplate(ConfigRoot).count("\n"))
-                File = MakeFileHandle(FileName)
+                continue  # Skip, This File Has the Proper Plate
             AddPlate(File, GetBoilerplate(ConfigRoot))
             File.close()
