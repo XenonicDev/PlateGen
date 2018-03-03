@@ -31,9 +31,14 @@ def MakeFileHandle(FileName):
     return open(FileName, "r+")
 
 def RemovePlate(FileHandle, FileName, BlockLastLine):
-    FileHandle.seek(BlockLastLine, 0)
+    print("SEEKING TO: ", BlockLastLine)
+    FileHandle.seek(0, 0)
+    # Read Until We're at the Target Line
+    for Iter in range(BlockLastLine):
+        FileHandle.readline()
     with open(FileName + ".tmp", "w") as TmpFile:
         for Line in FileHandle:
+            print("WRITING LINE: ", Line)
             TmpFile.write(Line)
     FileHandle.close()
     # Swap Temp with Original
@@ -64,7 +69,7 @@ for Directory in GetDirectoryList(ConfigRoot):
             File = MakeFileHandle(FileName)
             for OldPlate in GetOldBoilerplates(ConfigRoot):
                 if ContainsPlate(File, OldPlate):
-                    RemovePlate(File, FileName, OldPlate.count("\n"))
+                    RemovePlate(File, FileName, OldPlate.count("\n") + 1)
                     File = MakeFileHandle(FileName)
             if ContainsPlate(File, GetBoilerplate(ConfigRoot)):
                 continue  # Skip, This File Has the Proper Plate
