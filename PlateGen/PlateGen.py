@@ -26,13 +26,11 @@ def GetOldBoilerplates(TreeRoot):
 def FindMatches(SearchDirectory, FileExpression):
     return glob.glob(SearchDirectory + "/**/" + FileExpression, recursive=True)
 
-def AddPlate(FileName):
-    print("Found File: ", FileName)
-    try:
-        File = open(FileName, "r+")
-        File.close()
-    except Exception as Error:
-        print("File Error: " + repr(Error))
+def AddPlate(FileName, PlateBlock):
+    with open(FileName, "r+") as File:
+        Content = File.read()
+        File.seek(0, 0)
+        File.write(PlateBlock.rstrip("\r\n") + Content)
 
 ConfigTree = ElementTree.parse("Config.xml")
 ConfigRoot = ConfigTree.getroot()
@@ -40,4 +38,4 @@ ConfigRoot = ConfigTree.getroot()
 for Directory in GetDirectoryList(ConfigRoot):
     for FileExpression in GetFileList(ConfigRoot):
         for FileName in FindMatches(Directory, FileExpression):
-            AddPlate(FileName)
+            AddPlate(FileName, GetBoilerplate(ConfigRoot))
