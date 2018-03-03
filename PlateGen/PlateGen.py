@@ -1,6 +1,5 @@
 import sys
 import argparse
-import os
 import glob
 
 Parser = argparse.ArgumentParser()
@@ -17,8 +16,6 @@ def AddPlate(FileName):
         File.close()
     except Exception as Error:
         print("File Error: " + repr(Error))
-
-    
 
 for FileName in FindFiles(Arguments.Directory, Arguments.Files):
     AddPlate(FileName)
