@@ -1,27 +1,28 @@
 <Config>
 	<!--
-		List of Directories to Search In.
+		List of Directories to Search In. Relative or Absolute. Supports Regex Expressions.
 	-->
 	<DirectoryList>
-		<DirectoryA>D:\Code\Projects\PlateGen\Sample</DirectoryA>
+		<DirectoryA>../Sample</DirectoryA>
 	</DirectoryList>
 
 	<!--
-		List of File Names to Include.
+		List of File Names to Include. Supports Regex Expressions.
 	-->
 	<FileList>
-		<FileA>*.*</FileA>
+		<FileA>*.cpp</FileA>
+		<FileB>*.h</FileB>
 	</FileList>
 
 	<!--
-		Target Text Block to Add as Boilerplate
+		Target Text Block to Add as Boilerplate.
 	-->
 	<Boilerplate>/*
 	Test Boilerplate
 */</Boilerplate>
 
 	<!--
-		List of Potential Boilerplates to Search for and Replace with New Boilerplate Block
+		List of Potential Boilerplates to Search for and Replace with New Boilerplate Block.
 	-->
 	<OldBoilerplates>
 		<OldBoilerplateA>// Blah</OldBoilerplateA>

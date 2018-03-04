@@ -62,6 +62,7 @@ ConfigTree = ElementTree.parse("Config.xml")
 ConfigRoot = ConfigTree.getroot()
 
 for Directory in GetDirectoryList(ConfigRoot):
+    Directory = os.path.abspath(Directory)  # Convert to Absolute Path if Relative
     for FileExpression in GetFileList(ConfigRoot):
         for FileName in FindMatches(Directory, FileExpression):
             File = MakeFileHandle(FileName)
